@@ -14,4 +14,4 @@ inputs:
     description: "The ID of the deployment"
 runs:
   using: "node12"
-  main: "lib/main.js"
+  main: "src/main.ts"
