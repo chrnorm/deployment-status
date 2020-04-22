@@ -23,7 +23,7 @@ async function run() {
       core.getInput("environment_url", { required: false }) || "";
     const state = core.getInput("state") as DeploymentState;
 
-    const client = new github.GitHub(token);
+    const client = new github.GitHub(token, { previews: ["flash", "ant-man"] });
 
     await client.repos.createDeploymentStatus({
       ...context.repo,
