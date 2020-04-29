@@ -11,7 +11,7 @@ inputs:
   target-url:
     description: "Target url location"
     required: false
-  environment-url:
+  environment_url:
     description: "Sets the URL for accessing your environment"
      required: false
   description:
