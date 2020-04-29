@@ -11,6 +11,9 @@ inputs:
   target-url:
     description: "Target url location"
     required: false
+  environment-url:
+    description: "Sets the URL for accessing your environment"
+     required: false
   description:
     description: "Descriptive message about the deployment"
     required: false
