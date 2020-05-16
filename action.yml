@@ -8,9 +8,12 @@ inputs:
   token:
     description: "Github repository token"
     required: true
-  target-url:
+  target_url:
     description: "Target url location"
     required: false
+  environment_url:
+    description: "Environment url location"
+    required: false    
   description:
     description: "Descriptive message about the deployment"
     required: false
