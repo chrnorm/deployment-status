@@ -19,6 +19,7 @@ async function run() {
     const url = core.getInput("target_url", { required: false }) || defaultUrl;
     const description = core.getInput("description", { required: false }) || "";
     const deploymentId = core.getInput("deployment_id");
+    const environmentUrl = core.getInput("environment_url", { required: false }) || "";
     const state = core.getInput("state") as DeploymentState;
 
     const client = new github.GitHub(token, { previews: ["flash", "ant-man"] });
@@ -29,7 +30,8 @@ async function run() {
       state,
       log_url: defaultUrl,
       target_url: url,
-      description
+      description,
+      environment_url: environmentUrl
     });
   } catch (error) {
     core.error(error);
