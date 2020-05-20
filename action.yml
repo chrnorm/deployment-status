@@ -13,7 +13,7 @@ inputs:
     required: false
   environment_url:
     description: "Sets the URL for accessing your environment"
-     required: false
+    required: false
   description:
     description: "Descriptive message about the deployment"
     required: false
@@ -22,4 +22,4 @@ inputs:
     required: true
 runs:
   using: "node12"
-  main: "lib/main.js"
+  main: "dist/index.js"
