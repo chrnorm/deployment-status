@@ -3220,7 +3220,7 @@ function run() {
             const deploymentId = core.getInput("deployment_id");
             const environmentUrl = core.getInput("environment_url", { required: false }) || "";
             const state = core.getInput("state");
-            const client = new github.GitHub(token);
+            const client = new github.GitHub(token, { previews: ["flash", "ant-man"] });
             yield client.repos.createDeploymentStatus(Object.assign({}, context.repo, { deployment_id: parseInt(deploymentId), state, log_url: defaultUrl, target_url: url, description, environment_url: environmentUrl }));
         }
         catch (error) {
