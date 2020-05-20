@@ -71,3 +71,7 @@ Install dependencies with `npm install`.
 ## Building
 
 First build Typescript with `npm run build`. Then package to a single JS file with `npm run pack`. The `pack` step uses `ncc`(https://github.com/zeit/ncc) as specified in the Typescript GitHub Actions template.
+
+## Testing
+
+There is a validation workflow in `.github/workflows/validate.yml` which performs a basic smoke test against the action to check that it runs.
