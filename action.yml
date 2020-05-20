@@ -1,6 +1,9 @@
 name: "Deployment Status"
 description: "Creates a GitHub Deployment status update"
 author: "chrnorm"
+branding:
+  icon: arrow-up
+  color: gray-dark
 inputs:
   state:
     description: "State for the deployment"
