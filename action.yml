@@ -1,4 +1,4 @@
-name: "Deployment Action"
+name: "Deployment Status"
 description: "Creates a GitHub Deployment status update"
 author: "chrnorm"
 inputs:
