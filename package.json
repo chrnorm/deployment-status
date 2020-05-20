@@ -6,7 +6,8 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "pack": "./node_modules/.bin/ncc build"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.0.0",
-    "@actions/github": "^1.1.0"
+    "@actions/github": "^1.1.0",
+    "@zeit/ncc": "^0.22.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
