@@ -38,7 +38,6 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
-          target_url: http://my-app-url.com
           environment: production
 
       - name: Deploy my app
@@ -50,7 +49,7 @@ jobs:
         uses: chrnorm/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: http://my-app-url.com
+          environment_url: http://my-app-url.com
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
@@ -59,7 +58,7 @@ jobs:
         uses: chrnorm/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: http://my-app-url.com
+          environment_url: http://my-app-url.com
           state: "failure"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 ```
