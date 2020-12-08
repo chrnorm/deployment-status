@@ -10,7 +10,7 @@ Works great with my other action to create Deployments, [chrnorm/deployment-acti
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `state`           | The state to set the deployment to. Must be one of the below: "error" "failure" "inactive" "in_progress" "queued" "pending" "success" |
 | `token`           | GitHub token                                                                                                                          |
-| `target_url`      | (Optional) The target URL. This should be the URL of the app once deployed                                                            |
+| `log_url`         | (Optional) Sets the URL for deployment output                                                                                         |
 | `description`     | (Optional) Descriptive message about the deployment                                                                                   |
 | `environment_url` | (Optional) Sets the URL for accessing your environment                                                                                |
 | `deployment_id`   | The ID of the deployment to update                                                                                                    |
@@ -38,7 +38,7 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
-          target_url: http://my-app-url.com
+          environment_url: http://my-app-url.com
           environment: production
 
       - name: Deploy my app
@@ -50,7 +50,7 @@ jobs:
         uses: chrnorm/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: http://my-app-url.com
+          environment_url: http://my-app-url.com
           state: "success"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
@@ -59,7 +59,7 @@ jobs:
         uses: chrnorm/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
-          target_url: http://my-app-url.com
+          environment_url: http://my-app-url.com
           state: "failure"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 ```
