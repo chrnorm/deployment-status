@@ -13,10 +13,10 @@ type DeploymentState =
 async function run() {
   try {
     const context = github.context;
-    const defaultUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha}/checks`;
+    const defaultLogUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/commit/${context.sha}/checks`;
 
     const token = core.getInput("token", { required: true });
-    const url = core.getInput("target_url", { required: false }) || defaultUrl;
+    const logUrl = core.getInput("log_url", { required: false }) || core.getInput("target_url", { required: false }) || defaultLogUrl;
     const description = core.getInput("description", { required: false }) || "";
     const deploymentId = core.getInput("deployment_id");
     const environmentUrl =
@@ -29,8 +29,7 @@ async function run() {
       ...context.repo,
       deployment_id: parseInt(deploymentId),
       state,
-      log_url: defaultUrl,
-      target_url: url,
+      log_url: logUrl,
       description,
       environment_url: environmentUrl,
     });
