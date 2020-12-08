@@ -38,6 +38,7 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
+          environment_url: http://my-app-url.com
           environment: production
 
       - name: Deploy my app
