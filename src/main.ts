@@ -17,6 +17,7 @@ async function run() {
 
     const token = core.getInput("token", { required: true });
     const url = core.getInput("target_url", { required: false }) || defaultUrl;
+    const logUrl = core.getInput("log_url", { required: false }) || defaultUrl;
     const description = core.getInput("description", { required: false }) || "";
     const deploymentId = core.getInput("deployment_id");
     const environmentUrl =
@@ -29,7 +30,7 @@ async function run() {
       ...context.repo,
       deployment_id: parseInt(deploymentId),
       state,
-      log_url: defaultUrl,
+      log_url: logUrl,
       target_url: url,
       description,
       environment_url: environmentUrl,
