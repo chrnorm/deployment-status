@@ -14,9 +14,6 @@ inputs:
   target_url:
     description: "Target url location"
     required: false
-  log_url:
-    description: "Log url location"
-    required: false
   environment_url:
     description: "Sets the URL for accessing your environment"
     required: false
