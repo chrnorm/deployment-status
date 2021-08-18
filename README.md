@@ -11,7 +11,6 @@ Works great with my other action to create Deployments, [chrnorm/deployment-acti
 | `state`           | The state to set the deployment to. Must be one of the below: "error" "failure" "inactive" "in_progress" "queued" "pending" "success" |
 | `token`           | GitHub token                                                                                                                          |
 | `target_url`      | (Optional) The target URL. This should be the URL of the app once deployed                                                            |
-| `log_url`      | (Optional) The log URL. This should be the URL of the app logs once deployed                                                            |
 | `description`     | (Optional) Descriptive message about the deployment                                                                                   |
 | `environment_url` | (Optional) Sets the URL for accessing your environment                                                                                |
 | `deployment_id`   | The ID of the deployment to update                                                                                                    |
