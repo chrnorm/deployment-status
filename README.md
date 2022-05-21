@@ -6,14 +6,18 @@ Works great with my other action to create Deployments, [chrnorm/deployment-acti
 
 ## Action inputs
 
-| name              | description                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `state`           | The state to set the deployment to. Must be one of the below: "error" "failure" "inactive" "in_progress" "queued" "pending" "success" |
-| `token`           | GitHub token                                                                                                                          |
-| `log_url`         | (Optional) Sets the URL for deployment output                                                                                         |
-| `description`     | (Optional) Descriptive message about the deployment                                                                                   |
-| `environment_url` | (Optional) Sets the URL for accessing your environment                                                                                |
-| `deployment_id`   | The ID of the deployment to update                                                                                                    |
+| name              | description                                                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `repo`            | (Optional) A custom repository to create the deployment for. Defaults to the repo the action is running in.                                                            |
+| `owner`           | A custom owner to create the deployment for. Defaults to the repo owner the action is running in.                                                                      |
+| `state`           | The state to set the deployment to. Must be one of the below: "error" "failure" "inactive" "in_progress" "queued" "pending" "success"                                  |
+| `token`           | GitHub token                                                                                                                                                           |
+| `log-url`         | (Optional) Sets the URL for deployment output                                                                                                                          |
+| `environment-url` | (Optional) Sets the URL for accessing your environment                                                                                                                 |
+| `environment`     | (Optional) Name for the target deployment environment, which can be changed when setting a deploy status. Must be one of production, staging, qa, or can be undefined. |
+| `description`     | (Optional) Descriptive message about the deployment                                                                                                                    |
+| `deployment-id`   | The ID of the deployment to update                                                                                                                                     |
+| `github-base-url` | (Optional) Changes the API base URL for a GitHub Enterprise server.                                                                                                    |
 
 ## Usage example
 
@@ -33,12 +37,12 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: chrnorm/deployment-action@releases/v1
+      - uses: chrnorm/deployment-action@v2
         name: Create GitHub deployment
         id: deployment
         with:
-          token: "${{ github.token }}"
-          environment_url: http://my-app-url.com
+          token: '${{ github.token }}'
+          environment-url: http://my-app-url.com
           environment: production
 
       - name: Deploy my app
@@ -47,21 +51,21 @@ jobs:
 
       - name: Update deployment status (success)
         if: success()
-        uses: chrnorm/deployment-status@releases/v1
+        uses: chrnorm/deployment-status@v2
         with:
-          token: "${{ github.token }}"
-          environment_url: http://my-app-url.com
-          state: "success"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: '${{ github.token }}'
+          environment-url: http://my-app-url.com
+          state: 'success'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
 
       - name: Update deployment status (failure)
         if: failure()
-        uses: chrnorm/deployment-status@releases/v1
+        uses: chrnorm/deployment-status@v2
         with:
-          token: "${{ github.token }}"
-          environment_url: http://my-app-url.com
-          state: "failure"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          token: '${{ github.token }}'
+          environment-url: http://my-app-url.com
+          state: 'failure'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
 ```
 
 ## Development
@@ -74,4 +78,4 @@ First build Typescript with `npm run build`. Then package to a single JS file wi
 
 ## Testing
 
-There is a validation workflow in `.github/workflows/validate.yml` which performs a basic smoke test against the action to check that it runs.
+There is a validation workflow in `.github/workflows/test.yml` which performs a basic smoke test against the action to check that it runs.

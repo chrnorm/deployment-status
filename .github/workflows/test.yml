@@ -32,6 +32,6 @@ jobs:
         uses: ./
         with:
           token: '${{ github.token }}'
-          target_url: http://my-app-url.com
+          environment-url: http://my-app-url.com
           state: 'success'
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}

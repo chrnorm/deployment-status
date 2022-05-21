@@ -10,6 +10,8 @@ type DeploymentState =
   | 'pending'
   | 'success'
 
+type Environment = 'production' | 'staging' | 'qa' | undefined
+
 async function run(): Promise<void> {
   try {
     const context = github.context
@@ -22,16 +24,34 @@ async function run(): Promise<void> {
 
     const octokit = github.getOctokit(token, {baseUrl})
 
-    const logUrl = core.getInput('log_url', {required: false}) || defaultUrl
+    const owner =
+      core.getInput('owner', {required: false}) || context.repo.owner
+    const repo = core.getInput('repo', {required: false}) || context.repo.repo
+
+    const logUrl = core.getInput('log-url', {required: false}) || defaultUrl
     const description = core.getInput('description', {required: false}) || ''
-    const deploymentId = core.getInput('deployment_id')
+    const deploymentId = core.getInput('deployment-id')
     const environmentUrl =
-      core.getInput('environment_url', {required: false}) || ''
+      core.getInput('environment-url', {required: false}) || ''
+
+    const environment =
+      (core.getInput('environment', {required: false}) as Environment) ||
+      undefined
+
+    const autoInactiveStringInput =
+      core.getInput('auto-inactive', {required: false}) || undefined
+
+    const autoInactive = autoInactiveStringInput
+      ? autoInactiveStringInput === 'true'
+      : undefined
 
     const state = core.getInput('state') as DeploymentState
 
     await octokit.rest.repos.createDeploymentStatus({
-      ...context.repo,
+      owner,
+      repo,
+      environment,
+      auto_inactive: autoInactive, // GitHub API defaults to true if undefined.
       deployment_id: parseInt(deploymentId),
       state,
       log_url: logUrl,
