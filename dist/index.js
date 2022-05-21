@@ -49,12 +49,12 @@ function run() {
             const token = core.getInput('token', { required: true });
             const baseUrl = core.getInput('github-base-url', { required: false }) || undefined;
             const octokit = github.getOctokit(token, { baseUrl });
-            const url = core.getInput('target_url', { required: false }) || defaultUrl;
+            const logUrl = core.getInput('log_url', { required: false }) || defaultUrl;
             const description = core.getInput('description', { required: false }) || '';
             const deploymentId = core.getInput('deployment_id');
             const environmentUrl = core.getInput('environment_url', { required: false }) || '';
             const state = core.getInput('state');
-            yield octokit.rest.repos.createDeploymentStatus(Object.assign(Object.assign({}, context.repo), { deployment_id: parseInt(deploymentId), state, target_url: url, description, environment_url: environmentUrl }));
+            yield octokit.rest.repos.createDeploymentStatus(Object.assign(Object.assign({}, context.repo), { deployment_id: parseInt(deploymentId), state, log_url: logUrl, description, environment_url: environmentUrl }));
         }
         catch (error) {
             core.error(error);

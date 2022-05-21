@@ -22,7 +22,7 @@ async function run(): Promise<void> {
 
     const octokit = github.getOctokit(token, {baseUrl})
 
-    const url = core.getInput('target_url', {required: false}) || defaultUrl
+    const logUrl = core.getInput('log_url', {required: false}) || defaultUrl
     const description = core.getInput('description', {required: false}) || ''
     const deploymentId = core.getInput('deployment_id')
     const environmentUrl =
@@ -34,7 +34,7 @@ async function run(): Promise<void> {
       ...context.repo,
       deployment_id: parseInt(deploymentId),
       state,
-      target_url: url,
+      log_url: logUrl,
       description,
       environment_url: environmentUrl
     })
