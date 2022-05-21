@@ -25,7 +25,7 @@ jobs:
         id: deployment
         with:
           token: '${{ github.token }}'
-          target_url: http://my-app-url.com
+          target-url: http://my-app-url.com
           environment: production
 
       - name: Update deployment status
