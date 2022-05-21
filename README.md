@@ -32,6 +32,10 @@ jobs:
   deploy:
     name: Deploy my app
 
+    # IMPORTANT: the workflow must have write access to deployments, otherwise the action will fail.
+    permissions:
+      deployments: write
+
     runs-on: ubuntu-latest
 
     steps:
