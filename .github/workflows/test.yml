@@ -1,0 +1,37 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  build: # make sure build/ci work properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          npm install
+      - run: |
+          npm run all
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: '${{ github.token }}'
+          environment-url: http://my-app-url.com
+          environment: production
+
+      - name: Update deployment status
+        uses: ./
+        with:
+          token: '${{ github.token }}'
+          target_url: http://my-app-url.com
+          state: 'success'
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
