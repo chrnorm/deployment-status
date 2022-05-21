@@ -10,6 +10,7 @@ type DeploymentState =
   | 'pending'
   | 'success'
 
+// Environment can actually be any string, but we need to type it like this to fit the GitHub API's TypeScript types.
 type Environment = 'production' | 'staging' | 'qa' | undefined
 
 async function run(): Promise<void> {

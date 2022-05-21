@@ -25,7 +25,7 @@ inputs:
     required: false
     default: ''
   environment:
-    description: 'Name for the target deployment environment, which can be changed when setting a deploy status. Must be one of production, staging, qa, or can be undefined.'
+    description: 'Name for the target deployment environment, which can be changed when setting a deploy status.'
     required: false
   description:
     description: 'Descriptive message about the deployment'
