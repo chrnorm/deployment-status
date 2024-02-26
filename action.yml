@@ -41,5 +41,5 @@ inputs:
     description: 'Changes the API base URL for a GitHub Enterprise server.'
     required: false
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
