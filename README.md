@@ -11,7 +11,7 @@ Works great with my other action to create Deployments, [chrnorm/deployment-acti
 | `repo`            | (Optional) A custom repository to create the deployment for. Defaults to the repo the action is running in.                           |
 | `owner`           | A custom owner to create the deployment for. Defaults to the repo owner the action is running in.                                     |
 | `state`           | The state to set the deployment to. Must be one of the below: "error" "failure" "inactive" "in_progress" "queued" "pending" "success" |
-| `token`           | GitHub token                                                                                                                          |
+| `token`           | (Optional) GitHub token, defaults to `${{ github.token }}`                                                                            |
 | `log-url`         | (Optional) Sets the URL for deployment output                                                                                         |
 | `environment-url` | (Optional) Sets the URL for accessing your environment                                                                                |
 | `environment`     | (Optional) Name for the target deployment environment, which can be changed when setting a deploy status.                             |
@@ -45,7 +45,6 @@ jobs:
         name: Create GitHub deployment
         id: deployment
         with:
-          token: '${{ github.token }}'
           environment-url: http://my-app-url.com
           environment: production
 
@@ -57,7 +56,6 @@ jobs:
         if: success()
         uses: chrnorm/deployment-status@v2
         with:
-          token: '${{ github.token }}'
           environment-url: http://my-app-url.com
           state: 'success'
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
@@ -66,7 +64,6 @@ jobs:
         if: failure()
         uses: chrnorm/deployment-status@v2
         with:
-          token: '${{ github.token }}'
           environment-url: http://my-app-url.com
           state: 'failure'
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
