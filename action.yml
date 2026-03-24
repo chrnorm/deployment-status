@@ -16,7 +16,8 @@ inputs:
     required: true
   token:
     description: 'Github repository token'
-    required: true
+    default: ${{ github.token }}
+    required: false
   log-url:
     description: 'Sets the URL for deployment output'
     required: false
